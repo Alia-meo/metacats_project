@@ -1,0 +1,29 @@
+{% extends 'maincat/base.html' %}
+{% load static %}
+
+<body>
+{% block content %}
+
+<div class="container4" style="margin: 100px; margin-top: 180px; " >
+	<h1 class="intro__title" >Last updates:</h1>
+{% for post in posts %}
+		<section class="section--gray"  href="{% url 'blog:blog_single' post.id %}" style="background-color: white;
+border-radius: 5px; font-size: 24px;">
+		<div class="container__post" >
+			<a href="{% url 'blog:blog_single' post.id %}">{{ post.title }}</a>
+			<p>{{ post.anons }}</p>
+			<p>{{ post.full_text }}</p>
+
+		</div>
+		</section>
+		<p style="text-align: right; padding-right: 40px; font-size: 14px; background-color: white;
+border-radius: 5px;">{{ post.date }}</p>
+
+
+
+{% endfor %}
+
+</div>
+
+{% endblock content %}
+</body>

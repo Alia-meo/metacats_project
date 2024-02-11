@@ -1,0 +1,62 @@
+{% extends 'maincat/base.html' %}
+{% load static %}
+{% load merch_tags %}
+
+
+{% block content %}
+                                            <!--Sort-->
+<form method="get" action="" style="margin-top:140px; margin-left: 160px; position:relative; font-size: 15px;">
+    <a style="margin-left: 10px;"> Sort By:</a>
+        <select name="order_by" class="form-select" aria-label="Default select example" style="max-width: 400px; margin-bottom: 10px;">
+            <option value="default">Default</option>
+            <option value="-price">Price: High-Low</option>
+            <option value="price">Price: Low-High</option>
+        </select>
+
+        <div class="form-check" method="get">
+            <input class="form-check-input" type="checkbox" value="on" id="flexCheckDefault" name="on_sale">
+            <label class="form-check-label" for="flexCheckDefault" >
+                Only on Sale offers %
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-light"
+                style="margin: 0 auto; border-color: #DCADEF; margin-bottom: 20px; margin-top: 10px;">Show selected</button>
+
+</form>
+
+                                        <!--Products-->
+<div class="container4">
+    <ul class="products" style="margin-right:20px;">
+        {% tag_products as products %}
+        {% for product in goods %}
+        <li >
+            <a href="{% url 'merch:product' product.slug %} " style="text-decoration: none; color: black;">
+                <div class="card rounded custom-shadow" >
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt=".." class="card-img-top">
+                    {% endif %}
+                    <div class="card-body">
+                            <p class="card-title">{{ product.name }}</p>
+                        <p class="card-text text-truncate" style="padding: 1px;">{{ product.description }}</p>
+                        <p class="product_id">id {{ product.display_id }}</p>
+                        <div class="d-flex justify-content-between" style="font-size: 12px; font-weight: 200;">
+                            {% if product.discount %}
+                                <p><s>{{ product.price }}</s>$ | {{ product.sell_price }}$ </p>
+                                <p><strong></strong></p>
+                                <span class="badge bg-warning text-dark">-{{ product.discount }}% discount</span>
+                            {% else %}
+                                <p><strong>{{ product.price }} $</strong></p>
+                            {% endif %}
+                            <a class="nav__link" href="../login "><img src="{% static 'maincat/images/buy3.png' %}"
+                            width="32" height="32" style="margin-left: 0px; margin-right: 0px;" alt="..">
+                            <span>Buy now</span></a>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

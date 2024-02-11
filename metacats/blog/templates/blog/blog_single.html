@@ -1,0 +1,36 @@
+{% extends 'maincat/base.html' %}
+{% load static %}
+
+<body>
+{% block content %}
+
+<div class="container4" style="margin: 100px; margin-top: 180px; ">
+	<h1 class="intro__title">Last updates:</h1>
+
+		<section class="section--gray" style="background-color: white;
+border-radius: 5px;">
+		<div class="container__post">
+			<h3>{{ post.title }}</h3>
+			<p>{{ post.anons }}</p>
+			<p>{{ post.full_text }}</p>
+		</div>
+		</section>
+		<p style="text-align: right; padding-right: 40px; font-size: 14px; background-color: white;
+border-radius: 5px;">{{ post.date }}</p>
+	<p>Comments:</p>
+
+<h4> {% for comm in comment%}</h4>
+	<a >{{comm.user}}</a>
+	<p style="max-width: 600px; border-style: solid; border-width: 1px; border-radius: 10px; display: grid;">{{comm.text}}</p>
+{% endfor%}
+
+	<form method="post" style="display: grid;">
+			{% csrf_token %}
+            {{ form }}
+            <p><button class="btn1" type="submit" style="margin-top: 20px;"> Add comment </button></p>
+        </form>
+
+</div>
+
+{% endblock content %}
+</body>

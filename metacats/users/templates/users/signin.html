@@ -1,0 +1,15 @@
+{% extends 'maincat/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container4" style="padding-top: 100px; font-size: 14px;">
+    <h1 style="margin-top: 200 px;"> SIGN IN </h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><button type="submit"> Enter </button></p>
+            <a class="nav__link" href="{% url 'users:signup' %}" style="color: #DCADEF;">Need to register?</a>
+        </form>
+</div>
+{% endblock content%}
+

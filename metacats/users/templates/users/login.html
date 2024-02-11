@@ -1,0 +1,15 @@
+{% extends 'maincat/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container4">
+    <h1 style="margin-top: 200 px;"> Authorization </h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><button type="submit"> Enter </button></p>
+        </form>
+</div>
+{% endblock content%}
+
